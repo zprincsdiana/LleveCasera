@@ -22,9 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        txt_cel=findViewById(R.id.txt_cel_i);
-        txt_psw= findViewById(R.id.txt_psw_i);
-        btn_login_star= findViewById(R.id.btn_login_start);
+        txt_cel=(EditText) findViewById(R.id.txt_cel_i);
+        txt_psw=(EditText) findViewById(R.id.txt_psw_i);
+        btn_login_star= (Button) findViewById(R.id.btn_login_start);
         btn_login_star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
                 String clave = txt_psw.getText().toString();
                 C_Usuario user= new C_Usuario();
                 if(user.getByPhonePsw(celular,clave)==1){
-                    Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "!Bienvenido!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
                 }else{
                     Toast.makeText(getApplicationContext(), "Número o contraseña incorrectos, verifique sus datos. O cree una cuenta.", Toast.LENGTH_SHORT).show();

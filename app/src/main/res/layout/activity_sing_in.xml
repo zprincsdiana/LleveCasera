@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:gravity="center"
+
         android:layout_height="match_parent">
 
         <ImageView
@@ -42,7 +43,7 @@
             android:text="@string/sing_in" />
 
         <EditText
-            android:id="@+id/txt_nom"
+            android:id="@+id/txt_nom_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -54,7 +55,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/txt_ape"
+            android:id="@+id/txt_ape_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -66,7 +67,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/txt_cel"
+            android:id="@+id/txt_cel_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -78,7 +79,7 @@
             android:inputType="phone" />
 
         <EditText
-            android:id="@+id/txt_psw"
+            android:id="@+id/txt_psw_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -90,7 +91,7 @@
             android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/txt_email"
+            android:id="@+id/txt_email_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -103,7 +104,7 @@
             android:inputType="textEmailAddress" />
 
         <Button
-            android:id="@+id/btn_registro"
+            android:id="@+id/btn_registro_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="70dp"
@@ -115,7 +116,7 @@
             android:text="@string/registrarse" />
 
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_back_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="70dp"
