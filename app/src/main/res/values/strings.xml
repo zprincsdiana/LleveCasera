@@ -1,22 +1,39 @@
 <resources>
+    <!--String Login   -->
     <string name="app_name">Lleve Casera</string>
     <string name="intro_text">Accede para descubrir las mejores ofertas de tus mercados favoritos y llévese su yapita"</string>
     <string name="sing_in">Regístrese en Lleve Casera</string>
     <string name="login">Ingrese a Lleve Casera</string>
     <string name="create_cuenta">¿Aún no tienes cuenta? </string>
+
     <string name="title_activity_principal">PrincipalActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">!Bienvenid@ ¡</string>
+    <string name="nav_header_subtitle">mi.usuario.aqui@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+
+    <!--String Menú  -->
+
+    <string name="menu_perfil">Mi cuenta</string>
+    <string name="menu_producto">Productos</string>
+    <string name="menu_mercado">Mercados</string>
+    <string name="menu_carrito">Carrito de Compra</string>
+    <string name="menu_agencias">Agencias</string>
+    <string name="menu_settings">Configuración</string>
+    <string name="menu_logout">Cerrar Sesión</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
+    <string name="menu_camera">Camera</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="action_setting">Settings</string>
+
+    <!--String Imagenes  -->
     <string name="fondo">fondo</string>
     <string name="logo">logo</string>
+
+    <!--String Registro  -->
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="registrarse">Registrarse</string>
     <string name="data_celular">Celular</string>

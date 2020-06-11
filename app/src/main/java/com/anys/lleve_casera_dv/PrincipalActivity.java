@@ -45,6 +45,9 @@ public class PrincipalActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //Para que no se vea el fondo gris de los iconos del menú al ejecutar la app
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
