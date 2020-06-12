@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn_singin = (Button) findViewById(R.id.btn_sign_in);
+        btn_singin = findViewById(R.id.btn_sign_in);
         btn_singin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_login= (Button) findViewById(R.id.btn_login);
+        btn_login= findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +33,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
+
 }

@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/productosFragment">
 
-    <fragment
+   <!-- <fragment
         android:id="@+id/nav_home"
         android:name="com.anys.lleve_casera_dv.ui.home.HomeFragment"
         android:label="@string/menu_home"
@@ -21,5 +21,31 @@
         android:id="@+id/nav_slideshow"
         android:name="com.anys.lleve_casera_dv.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" />-->
+    <fragment
+        android:id="@+id/productosFragment"
+        android:name="com.anys.lleve_casera_dv.ProductosFragment"
+        android:label="@string/menu_producto"
+        tools:layout="@layout/fragment_productos" />
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.anys.lleve_casera_dv.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/agenciaFragment"
+        android:name="com.anys.lleve_casera_dv.AgenciaFragment"
+        android:label="fragment_agencia"
+        tools:layout="@layout/fragment_agencia" />
+    <fragment
+        android:id="@+id/carritoFragment"
+        android:name="com.anys.lleve_casera_dv.CarritoFragment"
+        android:label="fragment_carrito"
+        tools:layout="@layout/fragment_carrito" />
+    <fragment
+        android:id="@+id/mercadoFragment"
+        android:name="com.anys.lleve_casera_dv.MercadoFragment"
+        android:label="fragment_mercado"
+        tools:layout="@layout/fragment_mercado" />
+
 </navigation>
