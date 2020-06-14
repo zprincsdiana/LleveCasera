@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class PrincipalActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener{
+    /*implements NavigationView.OnNavigationItemSelectedListener*/{
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -58,7 +58,7 @@ public class PrincipalActivity extends AppCompatActivity
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        /*navigationView.setNavigationItemSelectedListener(this);*/
         navigationView.setItemIconTintList(null); //Para que no se vea el fondo gris de los iconos del menú al ejecutar la app
 
     }
@@ -77,7 +77,7 @@ public class PrincipalActivity extends AppCompatActivity
                 || super.onSupportNavigateUp();
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
         if (id==R.id.action_settings){
@@ -112,7 +112,7 @@ public class PrincipalActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
-    }
+    }*/
 
 
 

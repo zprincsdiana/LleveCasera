@@ -3,62 +3,78 @@ package com.anys.lleve_casera_dv;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductosFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.anys.lleve_casera_dv.Adaptadores.AdaptadorProductos;
+import com.anys.lleve_casera_dv.Pojos.Productos;
+
+import java.util.ArrayList;
+
+
 public class ProductosFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ProductosFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductosFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProductosFragment newInstance(String param1, String param2) {
-        ProductosFragment fragment = new ProductosFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    AdaptadorProductos adaptadorProductos;
+    RecyclerView recyclerViewProductos;
+    ArrayList<Productos> listProductos;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_productos, container, false);
+        View view = inflater.inflate(R.layout.fragment_productos, container, false);
+        recyclerViewProductos = view.findViewById(R.id.recyclerview);
+        listProductos = new ArrayList<>();
+        //Cargar la List
+        cargarLista();
+
+        mostrarElementos();
+
+        return view;
     }
+
+    public void cargarLista(){
+        listProductos.add(new Productos(1,"Quacker","Precio: S/1.50","Mercado Unicachi",
+                "Distrito: La Victoria",R.drawable.logo));
+        listProductos.add(new Productos(2,"Arroz","Precio: S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.wallpaper));
+        listProductos.add(new Productos(3,"Arroz","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.wallpaper));
+        listProductos.add(new Productos(4,"Arroz","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.wallpaper));
+        listProductos.add(new Productos(5,"Arroz","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.logo));
+        listProductos.add(new Productos(6,"Arroz","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.wallpaper));
+        listProductos.add(new Productos(7,"Arroz","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.wallpaper));
+        listProductos.add(new Productos(8,"Arroz","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.logo));
+    }
+
+    public void mostrarElementos(){
+        recyclerViewProductos.setLayoutManager(new LinearLayoutManager(getContext()));
+        adaptadorProductos = new AdaptadorProductos(getContext(),listProductos);
+        recyclerViewProductos.setAdapter(adaptadorProductos);
+
+        adaptadorProductos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mostrarNomProd = listProductos.get(recyclerViewProductos.getChildAdapterPosition(v)).getNombreProd();
+                Toast.makeText(getContext(),""+mostrarNomProd,Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
 }

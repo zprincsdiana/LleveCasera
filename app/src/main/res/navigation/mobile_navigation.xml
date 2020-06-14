@@ -5,23 +5,12 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/productosFragment">
 
-   <!-- <fragment
-        android:id="@+id/nav_home"
-        android:name="com.anys.lleve_casera_dv.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.anys.lleve_casera_dv.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.anys.lleve_casera_dv.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />-->
+        android:id="@+id/mercadoFragment"
+        android:name="com.anys.lleve_casera_dv.MercadoFragment"
+        android:label="@string/menu_mercado"
+        tools:layout="@layout/fragment_mercado" />
     <fragment
         android:id="@+id/productosFragment"
         android:name="com.anys.lleve_casera_dv.ProductosFragment"
@@ -30,22 +19,18 @@
     <fragment
         android:id="@+id/perfilFragment"
         android:name="com.anys.lleve_casera_dv.PerfilFragment"
-        android:label="fragment_perfil"
+        android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_perfil" />
     <fragment
         android:id="@+id/agenciaFragment"
         android:name="com.anys.lleve_casera_dv.AgenciaFragment"
-        android:label="fragment_agencia"
+        android:label="@string/menu_agencias"
         tools:layout="@layout/fragment_agencia" />
     <fragment
         android:id="@+id/carritoFragment"
         android:name="com.anys.lleve_casera_dv.CarritoFragment"
-        android:label="fragment_carrito"
+        android:label="@string/menu_carrito"
         tools:layout="@layout/fragment_carrito" />
-    <fragment
-        android:id="@+id/mercadoFragment"
-        android:name="com.anys.lleve_casera_dv.MercadoFragment"
-        android:label="fragment_mercado"
-        tools:layout="@layout/fragment_mercado" />
+
 
 </navigation>
