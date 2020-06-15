@@ -49,4 +49,21 @@
 
     <!--Titulos para los Fragments-->
     <string name="titulo_fproductos">Lista de productos</string>
+    <string name="titulo_fAgencias">Lista de Agencias</string>
+
+    <!--String Perfil Editar datos usuario-->
+    <string name="act_info">Actualice su información</string>
+    <string name="act_boton">Actualizar</string>
+
+    <!--Nombres Agencias-->
+    <string name="uber">UberEats</string>
+    <string name="nrouber">Contacto: 987654321</string>
+    <string name="glovo">Glovo</string>
+    <string name="nroglovo">Contacto: 998877665</string>
+    <string name="rappi">Rappi</string>
+    <string name="nrorappi">Contacto: 995544332</string>
+    <string name="domicilios">Domicilios.com</string>
+    <string name="nrodomicilios">Contacto: 993322110</string>
+
+
 </resources>
