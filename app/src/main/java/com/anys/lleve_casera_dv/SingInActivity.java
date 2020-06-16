@@ -41,7 +41,6 @@ public class SingInActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Registro realizado correctamente ",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(SingInActivity.this, LoginActivity.class));
                     /*Toast.makeText(getApplicationContext(),"Ha ocurrido un error , estamos verificando",Toast.LENGTH_LONG).show();*/
-                startActivity(new Intent(SingInActivity.this,LoginActivity.class));
                 finish();
 
 
