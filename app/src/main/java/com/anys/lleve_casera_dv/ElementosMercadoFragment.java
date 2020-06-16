@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 
 
-public class ElementosMercadoFragment extends Fragment implements CantProductoFragment.OnDialogListener{
+public class ElementosMercadoFragment extends Fragment{
     AdaptadorElementosMercado adaptadorElementosMercado;
     RecyclerView recyclerViewElemMerc;
     ArrayList<ElementosMercado> listElemMerc;
@@ -94,8 +94,4 @@ public class ElementosMercadoFragment extends Fragment implements CantProductoFr
         });
     }
 
-    @Override
-    public void OnPositiveButtonClicked(String cantidad) {
-        Toast.makeText(getActivity(), "Se agregó "+ cantidad + " unidades de " + nomProduct, Toast.LENGTH_SHORT).show();
-    }
 }
