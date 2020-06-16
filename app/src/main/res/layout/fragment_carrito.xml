@@ -5,10 +5,61 @@
     android:layout_height="match_parent"
     tools:context=".CarritoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:text="Pedidos "
+            android:textSize="20dp"
+            android:padding="10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="480dp" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:columnCount="2"
+            android:rowCount="2">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_margin="10dp"
+                android:gravity="left"
+                android:padding="10dp"
+                android:text="Total:  "
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Total:  "
+                android:textSize="15dp" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_margin="10dp"
+                android:text="Confirmar">
+
+            </Button>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_margin="10dp"
+                android:text="Cancelar" />
+
+        </GridLayout>
+
+    </LinearLayout>
 
 </FrameLayout>
