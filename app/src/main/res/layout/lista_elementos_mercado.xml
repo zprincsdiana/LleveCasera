@@ -20,7 +20,8 @@
             android:id="@+id/imagen_elemento_mercado"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/ic_launcher_background">
+            app:srcCompat="@drawable/ic_launcher_background"
+            android:contentDescription="image">
         </ImageView>
 
 
@@ -28,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             >
 
             <TextView
@@ -38,18 +39,40 @@
                 android:text="Nombre de producto"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/precioElementoMercado"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Precio del producto"
-                android:textSize="18sp"/>
-            <TextView
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S/. "
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/precioElementoMercado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Precio del producto"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:background="@drawable/regtangle_imge"
                 android:id="@+id/comprarElementoMercado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
                 android:text="Comprar"
-                android:textSize="18sp" />
+                 />
 
 
         </LinearLayout>
