@@ -37,7 +37,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Definir la vista - Enlaza el adapter con el RecyclerView ( Listar productos)
-        View view = inflater.from(parent.getContext()).inflate(R.layout.lista_productos,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_productos,parent,false);
         ViewHolder viewHolder= new ViewHolder(view);
         //Llamamos al evento onClick
         view.setOnClickListener(this);
@@ -58,7 +58,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         holder.precioproducto.setText(productos.get(position).getPrecioProd());
         holder.mercadoproducto.setText(productos.get(position).getNombreMerc());
         holder.distritomercado.setText(productos.get(position).getNombreDistr());
-        holder.imagenView.setImageResource(productos.get(position).getImage());
+        holder.imagenView.setImageResource(productos.get(position).getImagen_prod());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            cardView = itemView.findViewById(R.id.cardview);
+            cardView = itemView.findViewById(R.id.cardview_producto);
             imagenView = itemView.findViewById(R.id.imagen_producto);
             nombreproducto = itemView.findViewById(R.id.nombreProducto);
             precioproducto = itemView.findViewById(R.id.precioProducto);

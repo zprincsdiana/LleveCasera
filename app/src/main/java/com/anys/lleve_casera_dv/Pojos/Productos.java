@@ -2,17 +2,17 @@ package com.anys.lleve_casera_dv.Pojos;
 
 public class Productos {
 
-    private int id, image ;
+    private int id_producto, imagen_prod ;
     private String nombreProd,precioProd,nombreMerc,nombreDistr;
 
 
-    public Productos(int id,String nombreProd,String precioProd,String nombreMerc,String nombreDistr,int image){
-        this.id = id;
+    public Productos(int id_producto,String nombreProd,String precioProd,String nombreMerc,String nombreDistr,int imagen_prod){
+        this.id_producto = id_producto;
         this.nombreProd = nombreProd;
         this.precioProd = precioProd;
         this.nombreMerc = nombreMerc;
         this.nombreDistr = nombreDistr;
-        this.image = image;
+        this.imagen_prod = imagen_prod;
     }
 
     public Productos(){
@@ -20,11 +20,11 @@ public class Productos {
     }
 
     public int getId() {
-        return id;
+        return id_producto;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_producto = id;
     }
 
     public String getNombreProd() {
@@ -59,12 +59,10 @@ public class Productos {
         this.nombreDistr = nombreDistr;
     }
 
-    public int getImage() {
-        return image;
-    }
+    public int getImagen_prod() { return imagen_prod;    }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImagen_prod(int image) {
+        this.imagen_prod = image;
     }
 
 

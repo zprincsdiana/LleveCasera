@@ -33,17 +33,16 @@ public class ProductosFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_productos, container, false);
-        recyclerViewProductos = view.findViewById(R.id.recyclerview);
+        recyclerViewProductos = view.findViewById(R.id.recyclerview_producto);
         listProductos = new ArrayList<>();
         //Cargar la List
-        cargarLista();
-
+        cargarListaProductos();
         mostrarElementos();
 
         return view;
     }
 
-    public void cargarLista(){
+    public void cargarListaProductos(){
         listProductos.add(new Productos(1,"Quacker","Precio: S/1.50","Mercado Unicachi",
                 "Distrito: La Victoria",R.drawable.logo));
         listProductos.add(new Productos(2,"Arroz","Precio: S/2.50","Mercado Caqueta",
@@ -71,7 +70,7 @@ public class ProductosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String mostrarNomProd = listProductos.get(recyclerViewProductos.getChildAdapterPosition(v)).getNombreProd();
-                Toast.makeText(getContext(),""+mostrarNomProd,Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),""+mostrarNomProd,Toast.LENGTH_SHORT).show();
             }
         });
 
