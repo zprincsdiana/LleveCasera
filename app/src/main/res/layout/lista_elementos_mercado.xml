@@ -8,7 +8,7 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
-    android:id="@+id/cardview_productoMercado">
+    android:id="@+id/cardview_elementos_mercado">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,42 +17,47 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/imagen_producto_mercado"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/imagen_elemento_mercado"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:srcCompat="@drawable/ic_launcher_background">
         </ImageView>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
             >
 
             <TextView
-                android:id="@+id/nombreProductosMercado"
+                android:id="@+id/nombreElementoMercado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombres del Producto Escogido"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:padding="5dp"/>
+                android:text="Nombre de producto"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
             <TextView
-                android:id="@+id/precioProductoMercado"
+                android:id="@+id/precioElementoMercado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Precio del producto del mercado sel"
+                android:text="Precio del producto"
                 android:textSize="18sp"/>
             <TextView
-                android:id="@+id/nombreMercados"
+                android:id="@+id/comprarElementoMercado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre del Mercado del prod selecc"
-                android:textSize="18sp"/>
+                android:text="Comprar"
+                android:textSize="18sp" />
+
+
         </LinearLayout>
 
+
     </LinearLayout>
+
+
+
 
 </androidx.cardview.widget.CardView>

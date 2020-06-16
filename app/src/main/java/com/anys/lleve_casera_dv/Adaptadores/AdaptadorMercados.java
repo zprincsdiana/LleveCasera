@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.anys.lleve_casera_dv.Pojos.Mercados;
+import com.anys.lleve_casera_dv.Bean.Mercados;
 import com.anys.lleve_casera_dv.R;
 
 import java.util.ArrayList;
@@ -50,18 +50,7 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
         this.listener = listener;
     }
 
-    /*Mantiene la vista*/
-    @Override
-    public void onBindViewHolder(@NonNull AdaptadorMercados.ViewHolder holder, int position) {
-        //Obteniendo valores de la lista
-        holder.nombremercado.setText(mercados.get(position).getNombreMerc());
-        holder.distritomercado.setText(mercados.get(position).getNombreDistr());
-        holder.provinciamercado.setText(mercados.get(position).getNombreProv());
-        holder.regionMercado.setText(mercados.get(position).getNombreReg());
-        holder.celularmercado.setText(mercados.get(position).getCelularMerc()+"");
-        holder.imageViewMercado.setImageResource(mercados.get(position).getImagen_merc());
 
-    }
 
     //Muestra los items según el tamaño del arrayList Mercados
     @Override
@@ -92,5 +81,18 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
             regionMercado = itemView.findViewById(R.id.nombreRegion);
             celularmercado = itemView.findViewById(R.id.nroCelularMercado);
         }
+    }
+
+    /*Mantiene la vista*/
+    @Override
+    public void onBindViewHolder(@NonNull AdaptadorMercados.ViewHolder holder, int position) {
+        //Obteniendo valores de la lista
+        holder.nombremercado.setText(mercados.get(position).getNombreMerc());
+        holder.distritomercado.setText(mercados.get(position).getNombreDistr());
+        holder.provinciamercado.setText(mercados.get(position).getNombreProv());
+        holder.regionMercado.setText(mercados.get(position).getNombreReg());
+        holder.celularmercado.setText(mercados.get(position).getCelularMerc()+"");
+        holder.imageViewMercado.setImageResource(mercados.get(position).getImagen_merc());
+
     }
 }

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.anys.lleve_casera_dv.Pojos.Productos;
+import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
 
 import java.util.ArrayList;

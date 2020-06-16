@@ -22,6 +22,10 @@
     <string name="menu_settings">Configuración</string>
     <string name="menu_logout">Cerrar Sesión</string>
 
+    <!--String Nav Menu Navegacion entre Fragmentos-->
+    <string name="titulo_fproductoMercado">Lista Producto Seleccionado</string>
+    <string name="titulo_felementosMercado">Lista de Productos de Mercado</string>
+
     <string name="action_setting">Settings</string>
 
     <!--String Imagenes  -->

@@ -64,9 +64,7 @@
                 android:text="Número de celular"
                 android:textSize="18sp" />
 
-
         </LinearLayout>
-
 
     </LinearLayout>
 

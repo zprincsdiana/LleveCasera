@@ -1,4 +1,4 @@
-package com.anys.lleve_casera_dv.Pojos;
+package com.anys.lleve_casera_dv.Bean;
 
 public class Mercados {
 

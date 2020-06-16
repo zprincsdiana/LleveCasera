@@ -3,16 +3,16 @@ package com.anys.lleve_casera_dv;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorProductos;
-import com.anys.lleve_casera_dv.Pojos.Productos;
+import com.anys.lleve_casera_dv.Bean.Productos;
 
 import java.util.ArrayList;
 
@@ -44,21 +44,21 @@ public class ProductosFragment extends Fragment {
 
     public void cargarListaProductos(){
         listProductos.add(new Productos(1,"Quacker","Precio: S/1.50","Mercado Unicachi",
-                "Distrito: La Victoria",R.drawable.logo));
+                "Distrito: La Victoria",R.drawable.avena_quaker));
         listProductos.add(new Productos(2,"Arroz","Precio: S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.wallpaper));
-        listProductos.add(new Productos(3,"Arroz","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.wallpaper));
-        listProductos.add(new Productos(4,"Arroz","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.wallpaper));
-        listProductos.add(new Productos(5,"Arroz","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.logo));
-        listProductos.add(new Productos(6,"Arroz","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.wallpaper));
-        listProductos.add(new Productos(7,"Arroz","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.wallpaper));
-        listProductos.add(new Productos(8,"Arroz","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.logo));
+                "Distrito: San Martin de Porres",R.drawable.arroz_costeno));
+        listProductos.add(new Productos(3,"Avena","Precio:S/1.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.avena_ositos));
+        listProductos.add(new Productos(4,"Ajinomen","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.ajinomen));
+        listProductos.add(new Productos(5,"Frejoles","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.frejol_costeno));
+        listProductos.add(new Productos(6,"Chorizo","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.chorizo_ottok));
+        listProductos.add(new Productos(7,"Azucar","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.azucar_rubia));
+        listProductos.add(new Productos(8,"Arroz Hoja","Precio:S/2.50","Mercado Caqueta",
+                "Distrito: San Martin de Porres",R.drawable.arroz_hoja));
     }
 
     public void mostrarElementos(){
@@ -69,8 +69,10 @@ public class ProductosFragment extends Fragment {
         adaptadorProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*Prueba
                 String mostrarNomProd = listProductos.get(recyclerViewProductos.getChildAdapterPosition(v)).getNombreProd();
-                Toast.makeText(getContext(),""+mostrarNomProd,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),""+mostrarNomProd,Toast.LENGTH_SHORT).show();*/
+                Navigation.findNavController(v).navigate(R.id.productoMercadoFragment);
             }
         });
 
