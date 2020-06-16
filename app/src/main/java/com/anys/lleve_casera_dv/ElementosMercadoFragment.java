@@ -2,6 +2,7 @@ package com.anys.lleve_casera_dv;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,16 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorElementosMercado;
 import com.anys.lleve_casera_dv.Bean.ElementosMercado;
 
 import java.util.ArrayList;
 
-public class ElementosMercadoFragment extends Fragment {
+
+
+public class ElementosMercadoFragment extends Fragment implements CantProductoFragment.OnDialogListener{
     AdaptadorElementosMercado adaptadorElementosMercado;
     RecyclerView recyclerViewElemMerc;
     ArrayList<ElementosMercado> listElemMerc;
+    DialogFragment cantidadProducto = new CantProductoFragment();
+    String nomProduct="";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,7 @@ public class ElementosMercadoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_elementos_mercado, container, false);
+
         recyclerViewElemMerc = vista.findViewById(R.id.recyclerElementosMercado);
         listElemMerc = new ArrayList<>();
 
@@ -63,7 +72,7 @@ public class ElementosMercadoFragment extends Fragment {
 
     }
 
-    private void mostrarElemMercado() {
+    public void mostrarElemMercado() {
         recyclerViewElemMerc.setLayoutManager(new LinearLayoutManager(getContext()));
         adaptadorElementosMercado = new AdaptadorElementosMercado(getContext(),listElemMerc);
         recyclerViewElemMerc.setAdapter(adaptadorElementosMercado);
@@ -74,7 +83,19 @@ public class ElementosMercadoFragment extends Fragment {
                 /*Aqui se coloca
                 * Navigation.findNavController(v).navigate(R.id.ID_DE_LA_VISTA_PARA_AÑADIR_PRODUCTOS_AL_CARRITO);
                 * */
+                nomProduct = listElemMerc.get(recyclerViewElemMerc.getChildAdapterPosition(v)).getNombreElem();
+
+                cantidadProducto.show(getFragmentManager(), "cantidadProducto");
+                Bundle bundle = new Bundle();
+                bundle.putString(CantProductoFragment.Nombre, ""+ nomProduct);
+                cantidadProducto.setArguments(bundle);
+
             }
         });
+    }
+
+    @Override
+    public void OnPositiveButtonClicked(String cantidad) {
+        Toast.makeText(getActivity(), "Se agregó "+ cantidad + " unidades de " + nomProduct, Toast.LENGTH_SHORT).show();
     }
 }
