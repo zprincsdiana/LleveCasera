@@ -86,7 +86,7 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
     /*Mantiene la vista*/
     @Override
     public void onBindViewHolder(@NonNull AdaptadorMercados.ViewHolder holder, int position) {
-        //Obteniendo valores de la lista
+        //Colocando valores de al cardw
         holder.nombremercado.setText(mercados.get(position).getNombreMerc());
         holder.distritomercado.setText(mercados.get(position).getNombreDistr());
         holder.provinciamercado.setText(mercados.get(position).getNombreProv());

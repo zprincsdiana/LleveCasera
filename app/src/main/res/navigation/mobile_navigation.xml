@@ -53,6 +53,11 @@
         android:name="com.anys.lleve_casera_dv.ElementosMercadoFragment"
         android:label="@string/titulo_felementosMercado"
         tools:layout="@layout/fragment_elementos_mercado" />
+    <fragment
+        android:id="@+id/confirmar_CompraFragment"
+        android:name="com.anys.lleve_casera_dv.Confirmar_CompraFragment"
+        android:label="fragment_confirmar_compra"
+        tools:layout="@layout/fragment_confirmar_compra" />
 
 
 </navigation>
