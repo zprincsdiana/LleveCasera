@@ -24,7 +24,7 @@ public class ElementosMercadoFragment extends Fragment{
     AdaptadorElementosMercado adaptadorElementosMercado;
     RecyclerView recyclerViewElemMerc;
     ArrayList<ElementosMercado> listElemMerc;
-    DialogFragment cantidadProducto = new CantProductoFragment();
+    DialogFragment cantidadProducto = new CantProductoFragment2();
     String nomProduct="";
 
 
@@ -87,7 +87,7 @@ public class ElementosMercadoFragment extends Fragment{
 
                 cantidadProducto.show(getFragmentManager(), "cantidadProducto");
                 Bundle bundle = new Bundle();
-                bundle.putString(CantProductoFragment.Nombre, ""+ nomProduct);
+                bundle.putString(CantProductoFragment2.Nombre, ""+ nomProduct);
                 cantidadProducto.setArguments(bundle);
 
             }
