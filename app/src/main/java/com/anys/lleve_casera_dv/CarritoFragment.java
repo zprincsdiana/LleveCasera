@@ -46,7 +46,7 @@ public class CarritoFragment extends Fragment {
         bt_confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.confirmar_CompraFragment);
+                Navigation.findNavController(v).navigate(R.id.confirmar_compraFragment);
             }
         });
 

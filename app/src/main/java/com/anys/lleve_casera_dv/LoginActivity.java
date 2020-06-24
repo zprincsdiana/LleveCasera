@@ -9,17 +9,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-    EditText txt_cel, txt_psw;
-    Button btn_login_star;
+public class LoginActivity extends AppCompatActivity {
+    private TextInputLayout celu_validacion,contra_validacion;
+    TextInputEditText txt_cel, txt_psw;
+    Button btn_login_star,btn_login_registrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        /*Son del TextInputLayout*/
+        celu_validacion = findViewById(R.id.txt_celular);
+        contra_validacion = findViewById(R.id.txt_contra);
+        /*Son de TextInputEditText*/
         txt_cel= findViewById(R.id.txt_cel_i);
         txt_psw= findViewById(R.id.txt_psw_i);
+        /*Para validar .. .debe ir como cond antes de dar funcion al boton iniciar sesion */
+        confirmar();
+
+
+
+        /*Funcion a los botones iniciar sesion o registrarse*/
         btn_login_star= findViewById(R.id.btn_login_start);
         btn_login_star.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,9 +47,56 @@ public class LoginActivity extends AppCompatActivity {
                     txt_cel.setText("");
                     txt_psw.setText("");*/
 
+
             }
         });
+
+        btn_login_registrar = findViewById(R.id.btn_redi_registro);
+        btn_login_registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,SingInActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
+
+    /*Para validar los datos con el TextInputLayout*/
+    private boolean validarCelular(){
+        String num = celu_validacion.getEditText().getText().toString().trim();
+
+        if (num.isEmpty()){
+            celu_validacion.setError("Este espacio no puede estar en blanco");
+            
+            return false;
+        }else if(num.length()>9) {
+            celu_validacion.setError("Ingrese un número de celular válido");
+            return false;
+        }else {
+            celu_validacion.setError(null);
+            return true;
+        }
+    }
+    private boolean validarPass(){
+        String pass = contra_validacion.getEditText().getText().toString().trim();
+
+        if (pass.isEmpty()){
+            contra_validacion.setError("Este espacio no puede estar en blanco");
+            return false;
+        }else {
+            contra_validacion.setError(null);
+            return true;
+        }
+    }
+
+    public void confirmar(){
+        if (!validarCelular() | !validarPass()){
+            return;
+        }
+    }
+
 
 
 
