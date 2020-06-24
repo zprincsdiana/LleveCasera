@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -16,7 +17,6 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-
         android:layout_height="match_parent">
 
         <ImageView
@@ -42,30 +42,60 @@
             android:textSize="18sp"
             android:text="@string/login" />
 
-        <EditText
-            android:id="@+id/txt_cel_i"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_celular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:textColorHint="@color/white"
             android:textColor="@color/white"
-            android:hint="@string/data_celular"
-            android:inputType="phone"
-            android:autofillHints="@string/data_celular" />
+            app:errorEnabled="true"
+            app:counterMaxLength="9"
+            app:counterEnabled="true"
+            app:boxStrokeColor="@color/white"
+            app:boxBackgroundColor="@color/white"
+            >
 
-        <EditText
-            android:id="@+id/txt_psw_i"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_cel_i"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:hint="@string/data_celular"
+                android:inputType="phone"
+                android:autofillHints="@string/data_celular"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_contra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:hint="@string/data_contrasena"
-            android:autofillHints="@string/data_contrasena"
-            android:inputType="textPassword" />
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/black"
+            app:boxStrokeColor="@color/white"
+            app:boxBackgroundColor="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_psw_i"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:hint="@string/data_contrasena"
+                android:autofillHints="@string/data_contrasena"
+                android:inputType="textPassword" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_login_start"

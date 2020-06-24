@@ -47,7 +47,7 @@ public class PrincipalActivity extends AppCompatActivity
          */
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.perfilFragment,R.id.productosFragment,
                 R.id.mercadoFragment,R.id.agenciaFragment,R.id.carritoFragment,R.id.productoMercadoFragment,
-                R.id.elementos_mercadoFragment, R.id.nav_log_out)
+                R.id.elementos_mercadoFragment,R.id.confirmar_compraFragment,R.id.nav_log_out)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.content_principal);
