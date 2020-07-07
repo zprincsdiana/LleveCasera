@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,16 +15,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anys.lleve_casera_dv.Bean.Mercados;
+import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.ViewHolder>
-        implements OnClickListener {
+        implements OnClickListener, Filterable {
     //Parametros
     Context context;
     LayoutInflater inflater;
-    ArrayList<Mercados> mercados;
+    ArrayList<Mercados> mercados,listaTotMercados;
 
     //Listener
     private View.OnClickListener listener;
@@ -31,6 +35,7 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
     public AdaptadorMercados(Context context, ArrayList<Mercados> mercados) {
         this.inflater = LayoutInflater.from(context);
         this.mercados = mercados;
+        this.listaTotMercados = new ArrayList<>(mercados);
     }
 
 
@@ -64,6 +69,42 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
             listener.onClick(v);
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Mercados> listaFiltrada = new ArrayList<>();
+
+            if (charSequence.toString().isEmpty()){
+                listaFiltrada.addAll(listaTotMercados);
+            }else {
+                for (Mercados todo_mercado : listaTotMercados){
+                    String nombre_mercado = todo_mercado.getNombreMerc().toLowerCase();
+
+                    if (nombre_mercado.contains(charSequence.toString().toLowerCase())){
+                        listaFiltrada.add(todo_mercado);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = listaFiltrada;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mercados.clear();
+            mercados.addAll((Collection<?extends Mercados>)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
 
     //Llamamos a los elementos de la clase Mercados
     public class ViewHolder extends RecyclerView.ViewHolder {

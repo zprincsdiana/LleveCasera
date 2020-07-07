@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,22 +18,25 @@ import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.ViewHolder>
-        implements OnClickListener{
+        implements OnClickListener, Filterable {
     Context context;
     LayoutInflater inflater;
-    ArrayList<Productos> productos;
+    ArrayList<Productos> productos, listaTotProductos;
 
     //Listener - Cuando se seleccione un cardView
     private View.OnClickListener listener;
+
 
     //Constructor
     public AdaptadorProductos(Context context,ArrayList<Productos> productos){
         this.inflater = LayoutInflater.from(context);
         this.productos = productos;
-    }
+        this.listaTotProductos = new ArrayList<>(productos);
 
+    }
 
     @NonNull
     @Override
@@ -74,6 +79,47 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         }
     }
 
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+
+        //Ejecuta en el background
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<Productos> listaFiltrada = new ArrayList<>();
+
+            if (charSequence.toString().isEmpty()){
+                listaFiltrada.addAll(listaTotProductos);
+            }else {
+                for (Productos todo_producto : listaTotProductos){
+                    String nombres_productos = todo_producto.getNombreProd().toLowerCase();
+
+                    if (nombres_productos.contains(charSequence.toString().toLowerCase())){
+                        listaFiltrada.add(todo_producto);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = listaFiltrada;
+            return filterResults;
+        }
+
+        //Ejecuta en la UI
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            productos.clear();
+            productos.addAll((Collection<? extends Productos>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         ImageView imagenView;
@@ -91,6 +137,8 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
 
         }
 
-
     }
+
+
+
 }

@@ -58,6 +58,11 @@
         android:name="com.anys.lleve_casera_dv.Confirmar_CompraFragment"
         android:label="Confirmar Compra"
         tools:layout="@layout/fragment_confirmar_compra" />
+    <fragment
+        android:id="@+id/fragmentLogOut"
+        android:name="com.anys.lleve_casera_dv.LogOutFragment"
+        android:label="fragment_log_out"
+        tools:layout="@layout/fragment_log_out" />
 
 
 </navigation>

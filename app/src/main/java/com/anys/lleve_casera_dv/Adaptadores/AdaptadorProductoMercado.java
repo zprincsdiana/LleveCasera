@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,22 +15,25 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anys.lleve_casera_dv.Bean.ProductoMercado;
+import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class AdaptadorProductoMercado extends RecyclerView.Adapter<AdaptadorProductoMercado.ViewHolder>
-    implements OnClickListener {
+    implements OnClickListener, Filterable {
     //Parametros
     Context context;
     LayoutInflater inflater;
-    ArrayList<ProductoMercado> productoMercado;
+    ArrayList<ProductoMercado> productoMercado, listTotProdMerc;
 
     private View.OnClickListener listener;
 
     public AdaptadorProductoMercado(Context context, ArrayList<ProductoMercado> productoMercado) {
         this.inflater = LayoutInflater.from(context);
         this.productoMercado = productoMercado;
+        this.listTotProdMerc = new ArrayList<>(productoMercado);
     }
 
     @NonNull
@@ -45,6 +50,41 @@ public class AdaptadorProductoMercado extends RecyclerView.Adapter<AdaptadorProd
     public void setOnClickListener(View.OnClickListener listener) {
         this.listener = listener;
     }
+
+    @Override
+    public Filter getFilter() {
+
+        return filter;
+    }
+
+    Filter filter = new Filter(){
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<ProductoMercado> listaFiltrada = new ArrayList<>();
+
+            if (constraint.toString().isEmpty()){
+                listaFiltrada.addAll(listTotProdMerc);
+            }else {
+                for (ProductoMercado todo_prod_merc : listTotProdMerc){
+                    String nombres_prod_merc = todo_prod_merc.getNombreMercados().toLowerCase();
+                    if (nombres_prod_merc.contains(constraint.toString().toLowerCase())){
+                        listaFiltrada.add(todo_prod_merc);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values=listaFiltrada;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            productoMercado.clear();
+            productoMercado.addAll((Collection<?extends ProductoMercado>)results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardviewProductoMercado;

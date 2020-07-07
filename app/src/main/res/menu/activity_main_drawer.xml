@@ -31,7 +31,7 @@
             android:title="@string/menu_settings">
             <menu>
                 <item
-                    android:id="@+id/nav_log_out"
+                    android:id="@+id/fragmentLogOut"
                     android:icon="@android:drawable/ic_lock_power_off"
                     android:title="@string/menu_logout" />
             </menu>
