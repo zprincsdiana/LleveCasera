@@ -5,21 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.anys.lleve_casera_dv.io.response.UsuarioResponse;
 import com.anys.lleve_casera_dv.io.usuarioApiAdapter;
 import com.anys.lleve_casera_dv.model.Usuario;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,139 +27,155 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    TextInputLayout celu_validacion,contra_validacion;
-    EditText txt_cel, txt_psw;
-    Button btn_login_star,btn_login_registrar;
+
+    private TextInputLayout celu_validacion,contra_validacion;
+    private EditText txt_cel, txt_psw;
+    private Button btn_login_star,btn_login_registrar;
+    private RadioButton RBSesion;
+
+    private boolean isActivateRadioButton;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (Preferences.obtenerPreferencesBoolean(LoginActivity.this, Preferences.PREFERENCES_ESTADO_BUTTON_SESION)){
+            startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+        }
+
+
         /*Son del TextInputLayout*/
         celu_validacion = findViewById(R.id.txt_celular);
         contra_validacion = findViewById(R.id.txt_contra);
+
         /*Son de TextInputEditText*/
         txt_cel= findViewById(R.id.txt_cel_i);
         txt_psw= findViewById(R.id.txt_psw_i);
-        /*Para validar .. .debe ir como cond antes de dar funcion al boton iniciar sesion */
-        confirmar();
 
-        /*Funcion a los botones iniciar sesion o registrarse*/
+        celu_validacion.setErrorTextColor(ColorStateList.valueOf(Color.WHITE));
+        contra_validacion.setErrorTextColor(ColorStateList.valueOf(Color.WHITE));
+
+        RBSesion = findViewById(R.id.RBSesion);
+
+        isActivateRadioButton = RBSesion.isActivated(); //Esta variable guarda "desactivado"
+
+        RBSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isActivateRadioButton){
+                    RBSesion.setChecked(false);
+                }
+                isActivateRadioButton=RBSesion.isChecked(); //Esta variable cambia de valor
+            }
+        });
+
+        /*Para validar .. .debe ir como cond antes de dar funcion al boton iniciar sesion */
+
+
+        /*Boton: iniciar sesión*/
         btn_login_star= findViewById(R.id.btn_login_start);
         btn_login_star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              /*  String celularUsuario = txt_cel.getText().toString();
-                String contrasenaUsuario = txt_psw.getText().toString();*/
-
-                //Toast.makeText(getApplicationContext(), "cel: "+celularUsuario+ ", contra: "+contrasenaUsuario, Toast.LENGTH_SHORT).show();
-                //autenticar el usuario con la base de datos
-                autenticarLoginUsuario();
-
+                if(confirmar()){
+                    autenticarLoginUsuario();  //autenticar el usuario con la base de datos
+                }
             }
         });
 
+        /*Boton: registrarse*/
         btn_login_registrar = findViewById(R.id.btn_redi_registro);
         btn_login_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,SingInActivity.class);
                 startActivity(intent);
-
             }
         });
 
     }
 
-    //obtener los datos de la base de datos para comparar
 
+
+
+    //funcion para validar la existencia del usuario que se loguea
     private void autenticarLoginUsuario(){
-        Usuario user= new Usuario();
+
         String ps = txt_psw.getText().toString().trim();
+        String ph = txt_cel.getText().toString().trim();
+
+        Usuario user= new Usuario();
         user.setContrasenaUsuario(ps);
-        user.setCelularUsuario(txt_cel.getText().toString().trim());
+        user.setCelularUsuario(ph);
 
         Call<UsuarioResponse> call= usuarioApiAdapter.getApiService().userLogin(user);
         call.enqueue(new UsuariosCallback());
 
     }
 
-    /*
-    No se usa por el momento
-    private void obtenerDatosUsuario(ArrayList<Usuario> usuariolist){
-
-        *//*String celular = txt_cel.getText().toString();
-        String clave = txt_psw.getText().toString();
-        *//*
-
-        List<String> list = new ArrayList<String>();
-
-        for (Usuario u : usuariolist) {
-            list.add(u.getCelularUsuario());
-            list.add( u.getContrasenaUsuario());
-
-            Log.d("Ditels", " "+u.getContrasenaUsuario());
-            Log.d("Ditels", " "+u.getNombreUsuario());
-            Log.d("Ditels", " "+u.getCorreoUsuario());
-            Log.d("Ditels", " "+u.getCelularUsuario());
-            Log.d("Ditels", " "+u.getApellidoUsuario());
-            //Toast.makeText(getApplicationContext(), "contra: "+u.getContraseñaUsuario()+" "+ txt_psw.getText().toString(), Toast.LENGTH_SHORT).show();
-        }
-        String[] val_user = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            val_user[i] = list.get(i);
-        }
-
-        //Consultar a la base de datos
-        String cel= txt_cel.getText().toString().trim();
-        String cla= txt_psw.getText().toString().trim();
-        Log.d("Ditels", " "+list.get(1));
-        Toast.makeText(getApplicationContext(), "List: "+list.size()+"cel: "+val_user[0]+ ", contra: "+list.get(1), Toast.LENGTH_SHORT).show();
-        if(cel.equals(val_user[0]) && cla.equals(val_user[1])){
-            //saveLoginSharedPreferences(celular);
-            Toast.makeText(getApplicationContext(), R.string.bienvenido, Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
-        }else{
-            Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
-            txt_cel.setText("");
-            txt_psw.setText("");
-        }
-
-    }*/
-
     class UsuariosCallback implements Callback<UsuarioResponse> {
 
         @Override
         public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
-        if(response.isSuccessful()){
-            UsuarioResponse usuarioResponse= response.body();
-            assert usuarioResponse != null;
-            if(usuarioResponse.getEstado()==1){
-                //No se usa por el momento
-                //obtenerDatosUsuario(usuarioResponse.getUsuario());
-                Toast.makeText(getApplicationContext(), R.string.bienvenido, Toast.LENGTH_SHORT).show();
-               // String celular= txt_cel.getText().toString().trim();
-               // String contraseña = txt_psw.getText().toString().trim();
-                //saveLoginSharedPreferences(celular, contraseña);
-                startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
-                finish();
-                //String auten_cel = usuarioResponse.getUsuario().get(1).getCelularUsuario();
+            if(response.isSuccessful()){
+                UsuarioResponse usuarioResponse= response.body();
+                assert usuarioResponse != null;
+                //si estado = 1 -> ps && ph son correctos, user logueado correctamente
+                if(usuarioResponse.getEstado()==1){
+                    Preferences.savePreferencesBoolean(LoginActivity.this, RBSesion.isChecked(), Preferences.PREFERENCES_ESTADO_BUTTON_SESION); //guardamos el estado del boton solo cuando el usuario se halla logueado correctamente
+                    //Extraer los datos del usuario para su posterior uso
+                    obtenerDatosUsuario(usuarioResponse.getUsuario());
+                    Toast.makeText(getApplicationContext(), R.string.bienvenido, Toast.LENGTH_SHORT).show();
+                    // String celular= txt_cel.getText().toString().trim();
+                    // String contraseña = txt_psw.getText().toString().trim();
+                    //saveLoginSharedPreferences(celular, contraseña);
+                    startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                    finish();
+                }else{
+                    //Falta realizar el response de errores
+                    Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
+                    txt_cel.setText("");
+                    txt_psw.setText("");
+                }
             }else{
-                //Falta realizar el response de errores
-                Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
-                txt_cel.setText("");
-                txt_psw.setText("");
+                Toast.makeText(getApplicationContext(),"Error en el formato de respuesta", Toast.LENGTH_SHORT).show();
             }
-        }else{
-            Toast.makeText(getApplicationContext(),"Error en el formato de respuesta", Toast.LENGTH_SHORT).show();
-        }
         }
 
         @Override
         public void onFailure(Call<UsuarioResponse> call, Throwable t) {
             Toast.makeText(getApplicationContext(), t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    private void obtenerDatosUsuario(ArrayList<Usuario> usuariolist){
+
+        List<String> list = new ArrayList<>();
+
+        for (Usuario u : usuariolist) {
+            list.add( u.getCodigoUsuario());
+            list.add( u.getNombreUsuario());
+            list.add( u.getApellidoUsuario());
+            list.add( u.getCelularUsuario());
+            list.add( u.getCorreoUsuario());
+            list.add( u.getContrasenaUsuario());
+        }
+        String[] val_user = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            val_user[i] = list.get(i);
+        }
+
+        Preferences.savePreferencesString(LoginActivity.this, val_user[0], Preferences.PREFERENCES_codigoUsuario);
+        Preferences.savePreferencesString(LoginActivity.this, val_user[1], Preferences.PREFERENCES_nombreUsuario);
+        Preferences.savePreferencesString(LoginActivity.this, val_user[2], Preferences.PREFERENCES_apellidoUsuario);
+        Preferences.savePreferencesString(LoginActivity.this, val_user[3], Preferences.PREFERENCES_celularUsuario);
+        Preferences.savePreferencesString(LoginActivity.this, val_user[4], Preferences.PREFERENCES_correoUsuario);
+        Preferences.savePreferencesString(LoginActivity.this, val_user[5], Preferences.PREFERENCES_contrasenaUsuario);
+
     }
 
 
@@ -209,10 +225,11 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
-    public void confirmar(){
+    public boolean confirmar(){
         if (!validarCelular() | !validarPass()){
-            return;
+            return false;
         }
+        return true;
     }
 
 }
