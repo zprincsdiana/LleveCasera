@@ -35,12 +35,6 @@ public class PrincipalActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        nomUser = Preferences.obtenerPreferencesString(this, Preferences.PREFERENCES_nombreUsuario);
-        ApeUser= Preferences.obtenerPreferencesString(this, Preferences.PREFERENCES_apellidoUsuario);
-        emaiuser = Preferences.obtenerPreferencesString(this, Preferences.PREFERENCES_correoUsuario);
-
-        nomApe= nomUser +" "+ ApeUser;
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,6 +68,11 @@ public class PrincipalActivity extends AppCompatActivity{
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.content_principal);
 
+        nomUser = Preferences.obtenerPreferencesString(this, Preferences.PREFERENCES_nombreUsuario);
+        ApeUser= Preferences.obtenerPreferencesString(this, Preferences.PREFERENCES_apellidoUsuario);
+        emaiuser = Preferences.obtenerPreferencesString(this, Preferences.PREFERENCES_correoUsuario);
+
+        nomApe= nomUser +" "+ ApeUser;
         // para llenar los datos del menu
         textView_nombreApellido= findViewById(R.id.textView_nombreApellido);
         textView_correo=findViewById(R.id.textView_correo);

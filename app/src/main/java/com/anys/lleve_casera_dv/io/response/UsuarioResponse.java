@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public class UsuarioResponse {
     int estado;
+    String mensaje;
     ArrayList<Usuario> usuario;
-
-    public int getEstado() {
-        return estado;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public void setEstado(int estado) {
-        this.estado = estado;
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     public ArrayList<Usuario> getUsuario() {
@@ -23,6 +23,16 @@ public class UsuarioResponse {
     public void setUsuario(ArrayList<Usuario> usuario) {
         this.usuario = usuario;
     }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+
 
 
 

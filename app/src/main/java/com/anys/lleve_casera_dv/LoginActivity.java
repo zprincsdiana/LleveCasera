@@ -129,12 +129,10 @@ public class LoginActivity extends AppCompatActivity {
                     //Extraer los datos del usuario para su posterior uso
                     obtenerDatosUsuario(usuarioResponse.getUsuario());
                     Toast.makeText(getApplicationContext(), R.string.bienvenido, Toast.LENGTH_SHORT).show();
-                    // String celular= txt_cel.getText().toString().trim();
-                    // String contraseña = txt_psw.getText().toString().trim();
-                    //saveLoginSharedPreferences(celular, contraseña);
                     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
-                    finish();
-                }else{
+                 }else{
+                    String msgError = usuarioResponse.getMensaje();
+                    Toast.makeText(getApplicationContext(), msgError, Toast.LENGTH_SHORT).show();
                     //Falta realizar el response de errores
                     Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
                     txt_cel.setText("");
@@ -177,26 +175,6 @@ public class LoginActivity extends AppCompatActivity {
         Preferences.savePreferencesString(LoginActivity.this, val_user[5], Preferences.PREFERENCES_contrasenaUsuario);
 
     }
-
-
-
-  /*  //guardar los datos del login en un SharedPreferences
-    private void saveLoginSharedPreferences(String celular, String contraseña){
-        SharedPreferences sharedPref = getSharedPreferences("login_preferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor= sharedPref.edit();
-        editor.putString("celular", celular);
-        editor.putString("psw", contraseña);
-        editor.apply();
-    }*/
-
-    /*//Para obtener las preferencias
-    * private String getFromSharedPrefernces(String key){
-    * SharedPrefernces sharedPref= getActivitiy().getSharePreferences("login_preferences", Context.MODE_PRIVATE);
-    * return shredPref.getString(key, "");
-    * }
-    *
-    * */
-
 
     /*Para validar los datos con el TextInputLayout*/
     private boolean validarCelular(){

@@ -68,7 +68,7 @@
     <string name="domicilios">Domicilios.com</string>
     <string name="nrodomicilios">Contacto: 993322110</string>
     <string name="bienvenido">!Bienvenido!</string>
-    <string name="login_error">Número o contraseña incorrectos, verifique sus datos. O cree una cuenta.</string>
+    <string name="login_error">Verifique sus datos. O cree una cuenta.</string>
     <string name="no_cerrar_sesion">No cerrar sesión</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
     <string name="search">Search</string>
