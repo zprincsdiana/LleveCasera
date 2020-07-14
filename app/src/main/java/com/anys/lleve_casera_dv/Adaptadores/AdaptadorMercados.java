@@ -1,6 +1,7 @@
 package com.anys.lleve_casera_dv.Adaptadores;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anys.lleve_casera_dv.Bean.Mercados;
 import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
+import com.anys.lleve_casera_dv.model.Mercado;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,13 +29,13 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
     //Parametros
     Context context;
     LayoutInflater inflater;
-    ArrayList<Mercados> mercados,listaTotMercados;
+    ArrayList<Mercado> mercados,listaTotMercados;
 
     //Listener
     private View.OnClickListener listener;
 
     /*Constructor*/
-    public AdaptadorMercados(Context context, ArrayList<Mercados> mercados) {
+    public AdaptadorMercados(Context context, ArrayList<Mercado> mercados) {
         this.inflater = LayoutInflater.from(context);
         this.mercados = mercados;
         this.listaTotMercados = new ArrayList<>(mercados);
@@ -77,13 +80,13 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
     Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<Mercados> listaFiltrada = new ArrayList<>();
+            ArrayList<Mercado> listaFiltrada = new ArrayList<>();
 
             if (charSequence.toString().isEmpty()){
                 listaFiltrada.addAll(listaTotMercados);
             }else {
-                for (Mercados todo_mercado : listaTotMercados){
-                    String nombre_mercado = todo_mercado.getNombreMerc().toLowerCase();
+                for (Mercado todo_mercado : listaTotMercados){
+                    String nombre_mercado = todo_mercado.getNombreMercado().toLowerCase();
 
                     if (nombre_mercado.contains(charSequence.toString().toLowerCase())){
                         listaFiltrada.add(todo_mercado);
@@ -99,7 +102,7 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mercados.clear();
-            mercados.addAll((Collection<?extends Mercados>)results.values);
+            mercados.addAll((Collection<?extends Mercado>)results.values);
             notifyDataSetChanged();
         }
     };
@@ -123,17 +126,21 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
             celularmercado = itemView.findViewById(R.id.nroCelularMercado);
         }
     }
-
     /*Mantiene la vista*/
     @Override
     public void onBindViewHolder(@NonNull AdaptadorMercados.ViewHolder holder, int position) {
         //Colocando valores de al cardw
-        holder.nombremercado.setText(mercados.get(position).getNombreMerc());
-        holder.distritomercado.setText(mercados.get(position).getNombreDistr());
-        holder.provinciamercado.setText(mercados.get(position).getNombreProv());
-        holder.regionMercado.setText(mercados.get(position).getNombreReg());
-        holder.celularmercado.setText(mercados.get(position).getCelularMerc()+"");
-        holder.imageViewMercado.setImageResource(mercados.get(position).getImagen_merc());
+        String url= "https://smipmec.000webhostapp.com/Proyecto/LleveCasera/recursos/img/mercado/home.png";
+        holder.nombremercado.setText(mercados.get(position).getNombreMercado());
+        holder.distritomercado.setText(mercados.get(position).getDistritoMercado());
+        holder.provinciamercado.setText(mercados.get(position).getProvinciaMercado());
+        holder.regionMercado.setText(mercados.get(position).getRegionMercado());
+        holder.celularmercado.setText(mercados.get(position).getCelularMercado()+"");
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.ic_mercado)
+                .error(R.drawable.ic_mercado)
+                .into(holder.imageViewMercado);
 
     }
 }

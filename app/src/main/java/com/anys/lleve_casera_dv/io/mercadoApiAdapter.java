@@ -5,11 +5,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class usuarioApiAdapter {
+public class mercadoApiAdapter {
+    private static mercadoApiService API_SERVICE;
 
-    private static usuarioApiService API_SERVICE;
-
-    public static usuarioApiService getApiService() {
+    public static mercadoApiService getApiService() {
 
         // Creamos un interceptor y le indicamos el log level a usar
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -27,7 +26,7 @@ public class usuarioApiAdapter {
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build()) // <-- usamos el log level
                     .build();
-            API_SERVICE = retrofit.create(usuarioApiService.class);
+            API_SERVICE = retrofit.create(mercadoApiService.class);
         }
         return API_SERVICE;
     }
