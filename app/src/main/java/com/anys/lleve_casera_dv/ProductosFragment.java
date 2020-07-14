@@ -14,17 +14,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorProductos;
 import com.anys.lleve_casera_dv.Bean.Productos;
+import com.anys.lleve_casera_dv.io.productoApiAdapter;
+import com.anys.lleve_casera_dv.io.response.ProductosResponse;
+import com.anys.lleve_casera_dv.model.Producto;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ProductosFragment extends Fragment {
     AdaptadorProductos adaptadorProductos;
     RecyclerView recyclerViewProductos;
-    ArrayList<Productos> listProductos;
+    ArrayList<Producto> listProductos;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,16 +47,18 @@ public class ProductosFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_productos, container, false);
         recyclerViewProductos = view.findViewById(R.id.recyclerview_producto);
-        listProductos = new ArrayList<>();
+        //listProductos = new ArrayList<>();
         //Cargar la List
         cargarListaProductos();
-        mostrarElementos();
+       // mostrarElementos();
 
         return view;
     }
 
     public void cargarListaProductos(){
-        listProductos.add(new Productos(1,"Quacker","Precio: S/1.50","Mercado Unicachi",
+        Call<ProductosResponse> call = productoApiAdapter.getApiService().getAllProducto();
+        call.enqueue(new productosCallback());
+        /*listProductos.add(new Productos(1,"Quacker","Precio: S/1.50","Mercado Unicachi",
                 "Distrito: La Victoria",R.drawable.avena_quaker));
         listProductos.add(new Productos(2,"Arroz","Precio: S/2.50","Mercado Caqueta",
                 "Distrito: San Martin de Porres",R.drawable.arroz_costeno));
@@ -64,7 +74,35 @@ public class ProductosFragment extends Fragment {
                 "Distrito: San Martin de Porres",R.drawable.azucar_rubia));
         listProductos.add(new Productos(8,"Arroz Hoja","Precio:S/2.50","Mercado Caqueta",
                 "Distrito: San Martin de Porres",R.drawable.arroz_hoja));
+   */
+
     }
+
+
+
+        class productosCallback implements Callback<ProductosResponse>{
+
+            @Override
+            public void onResponse(Call<ProductosResponse> call, Response<ProductosResponse> response) {
+                if (response.isSuccessful()){
+                    ProductosResponse productosResponse = response.body();
+                    if(productosResponse.getEstado() == 1){
+                        listProductos = productosResponse.getProductos();
+                        mostrarElementos();
+                    }
+                }else{
+                    Toast.makeText(getContext(), "Error en el formato de respuesta", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductosResponse> call, Throwable t) {
+
+            }
+        }
+
+
+
 
     public void mostrarElementos(){
         recyclerViewProductos.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -16,7 +16,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anys.lleve_casera_dv.Bean.Mercados;
-import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
 import com.anys.lleve_casera_dv.model.Mercado;
 import com.squareup.picasso.Picasso;
@@ -130,12 +129,13 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
     @Override
     public void onBindViewHolder(@NonNull AdaptadorMercados.ViewHolder holder, int position) {
         //Colocando valores de al cardw
-        String url= "https://smipmec.000webhostapp.com/Proyecto/LleveCasera/recursos/img/mercado/home.png";
+        String id = mercados.get(position).getCodigoMercado();
+        String url= "https://smipmec.000webhostapp.com/Proyecto/LleveCasera/recursos/img/mercado/"+id+".png";
         holder.nombremercado.setText(mercados.get(position).getNombreMercado());
         holder.distritomercado.setText(mercados.get(position).getDistritoMercado());
         holder.provinciamercado.setText(mercados.get(position).getProvinciaMercado());
         holder.regionMercado.setText(mercados.get(position).getRegionMercado());
-        holder.celularmercado.setText(mercados.get(position).getCelularMercado()+"");
+        holder.celularmercado.setText(mercados.get(position).getCelularMercado());
         Picasso.get()
                 .load(url)
                 .placeholder(R.drawable.ic_mercado)

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
+import com.anys.lleve_casera_dv.model.Producto;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,14 +26,14 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         implements OnClickListener, Filterable {
     Context context;
     LayoutInflater inflater;
-    ArrayList<Productos> productos, listaTotProductos;
+    ArrayList<Producto> productos, listaTotProductos;
 
     //Listener - Cuando se seleccione un cardView
     private View.OnClickListener listener;
 
 
     //Constructor
-    public AdaptadorProductos(Context context,ArrayList<Productos> productos){
+    public AdaptadorProductos(Context context,ArrayList<Producto> productos){
         this.inflater = LayoutInflater.from(context);
         this.productos = productos;
         this.listaTotProductos = new ArrayList<>(productos);
@@ -55,16 +57,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         this.listener = listener;
     }
 
-    //Mantiene la vista
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.nombreproducto.setText(productos.get(position).getNombreProd());
-        holder.precioproducto.setText(productos.get(position).getPrecioProd());
-        holder.mercadoproducto.setText(productos.get(position).getNombreMerc());
-        holder.distritomercado.setText(productos.get(position).getNombreDistr());
-        holder.imagenView.setImageResource(productos.get(position).getImagen_prod());
-    }
 
     @Override
     public int getItemCount() {
@@ -90,15 +83,15 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         //Ejecuta en el background
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<Productos> listaFiltrada = new ArrayList<>();
+            ArrayList<Producto> listaFiltrada = new ArrayList<>();
 
             if (charSequence.toString().isEmpty()){
                 listaFiltrada.addAll(listaTotProductos);
             }else {
-                for (Productos todo_producto : listaTotProductos){
-                    String nombres_productos = todo_producto.getNombreProd().toLowerCase();
+                for (Producto todo_producto : listaTotProductos){
+                    String nombre_producto = todo_producto.getNombreProducto().toLowerCase();
 
-                    if (nombres_productos.contains(charSequence.toString().toLowerCase())){
+                    if (nombre_producto.contains(charSequence.toString().toLowerCase())){
                         listaFiltrada.add(todo_producto);
                     }
                 }
@@ -113,7 +106,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             productos.clear();
-            productos.addAll((Collection<? extends Productos>) filterResults.values);
+            productos.addAll((Collection<? extends Producto>) filterResults.values);
             notifyDataSetChanged();
         }
     };
@@ -139,6 +132,20 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
 
     }
 
-
+    //Mantiene la vista
+    @Override
+    public void onBindViewHolder(@NonNull AdaptadorProductos.ViewHolder holder, int position) {
+        String nomImg = productos.get(position).getNombreProducto();
+        String url = "https://smipmec.000webhostapp.com/Proyecto/LleveCasera/recursos/img/producto/"+nomImg+".jpg";
+        holder.nombreproducto.setText(productos.get(position).getNombreProducto());
+        holder.precioproducto.setText(productos.get(position).getPrecioProductoM());
+        holder.mercadoproducto.setText(productos.get(position).getNombreMercado());
+        holder.distritomercado.setText(productos.get(position).getDistritoMercado());
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.ic_mercado)
+                .error(R.drawable.ic_mercado)
+                .into(holder.imagenView);
+    }
 
 }
