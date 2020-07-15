@@ -18,14 +18,11 @@ import android.widget.Toast;
 
 
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorMercados;
-import com.anys.lleve_casera_dv.Bean.Mercados;
 import com.anys.lleve_casera_dv.io.mercadoApiAdapter;
 import com.anys.lleve_casera_dv.io.response.MercadosResponse;
 import com.anys.lleve_casera_dv.model.Mercado;
-import com.anys.lleve_casera_dv.model.Usuario;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,11 +46,10 @@ public class MercadoFragment extends Fragment {
         // Inflate the layout for this fragment
         View viewVista = inflater.inflate(R.layout.fragment_mercado, container, false);
         recyclerViewMercados = viewVista.findViewById(R.id.recyclerMercado);
-        //listMercados = new ArrayList<>();
+
 
         //Cargar Lista
         cargarListaMercados();
-        //mostrarElem();
 
         return viewVista;
     }
@@ -62,20 +58,6 @@ public class MercadoFragment extends Fragment {
 
         Call<MercadosResponse> call = mercadoApiAdapter.getApiService().getAllMercado();
         call.enqueue(new mercadosCallback());
-/*        listMercados.add(new Mercados(1,R.drawable.ic_mercado,999887745,
-                "Unicachi","Villa El Salvador","Lima","Lima "));
-        listMercados.add(new Mercados(2,R.drawable.mercado2,999887745,
-                "El Hueco","La Victoria","Lima","Lima "));
-        listMercados.add(new Mercados(3,R.drawable.ic_mercado,999887745,
-                "La Parada","La Victoria","Lima","Lima "));
-        listMercados.add(new Mercados(4,R.drawable.mercado4,999887745,
-                "Abancay","La Victoria","Lima","Lima "));
-        listMercados.add(new Mercados(5,R.drawable.mercado3,999887745,
-                "Caquetá","San Martin de Porres","Lima","Lima "));
-        listMercados.add(new Mercados(6,R.drawable.mercado2,999887745,
-                "Ciudad de Dios","San Juan de Miraflores","Lima","Lima "));
-        listMercados.add(new Mercados(7,R.drawable.mercado3,999887745,
-                "Mercado Pesqueros","Callao","Callao","Lima "));*/
 
     }
     class mercadosCallback implements Callback<MercadosResponse>{
@@ -87,7 +69,6 @@ public class MercadoFragment extends Fragment {
                 if(mercadosResponse.getEstado() == 1){
                     listMercados = mercadosResponse.getMercados();
                     mostrarElem();
-                    //poblarRecyclerView(mercadosResponse.getMercados());
                 }
             }else{
                 Toast.makeText(getContext(), "Error en el formato de respuesta", Toast.LENGTH_SHORT).show();
@@ -102,30 +83,14 @@ public class MercadoFragment extends Fragment {
         }
     }
 
-    private  List<String>  poblarRecyclerView(ArrayList<Mercado> mercados) {
-        List<String> list = new ArrayList<>();
-
-        for (Mercado m : mercados) {
-            list.add( m.getCodigoMercado());
-            list.add( m.getNombreMercado());
-            list.add( m.getDistritoMercado());
-            list.add( m.getProvinciaMercado());
-            list.add( m.getRegionMercado());
-            list.add( m.getCelularMercado());
-        }
-        return list;
-    }
-
     public void mostrarElem(){
+        recyclerViewMercados.setHasFixedSize(true);
         recyclerViewMercados.setLayoutManager(new LinearLayoutManager(getContext()));
         adaptadorMercados = new AdaptadorMercados(getContext(),listMercados);
         recyclerViewMercados.setAdapter(adaptadorMercados);
         adaptadorMercados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               /* String mostrarNomMercado = listMercados.get(recyclerViewMercados.getChildAdapterPosition(v)).getNombreMerc();
-                Toast.makeText(getContext(),""+mostrarNomMercado,Toast.LENGTH_SHORT).show();*/
 
                 Navigation.findNavController(v).navigate(R.id.elementos_mercadoFragment);
             }

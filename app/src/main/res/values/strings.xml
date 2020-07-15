@@ -72,6 +72,8 @@
     <string name="no_cerrar_sesion">No cerrar sesión</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
     <string name="search">Search</string>
+    <string name="imgmercado">imgMercado</string>
+    <string name="nombre_de_mercado">Nombre de Mercado</string>
 
 
 </resources>

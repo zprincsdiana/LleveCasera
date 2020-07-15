@@ -26,7 +26,6 @@ import java.util.Collection;
 public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.ViewHolder>
         implements OnClickListener, Filterable {
     //Parametros
-    Context context;
     LayoutInflater inflater;
     ArrayList<Mercado> mercados,listaTotMercados;
 
