@@ -8,12 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.anys.lleve_casera_dv.Adaptadores.AdaptadorMercados;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,14 +23,12 @@ import androidx.navigation.ui.NavigationUI;
 
 
 
-public class PrincipalActivity extends AppCompatActivity{
+public class PrincipalActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration ;
     TextView textView_nombreApellido, textView_correo;
     String nomUser,ApeUser, emaiuser, nomApe;
 
     SharedPreferences preferences;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,9 @@ public class PrincipalActivity extends AppCompatActivity{
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        TextView title = findViewById(R.id.toolbar_title);
+        title.setText("Productos");
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

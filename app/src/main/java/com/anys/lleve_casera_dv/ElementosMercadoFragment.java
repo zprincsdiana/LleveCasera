@@ -14,20 +14,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorElementosMercado;
-import com.anys.lleve_casera_dv.Bean.ElementosMercado;
+import com.anys.lleve_casera_dv.io.mercadoApiAdapter;
+import com.anys.lleve_casera_dv.io.response.ProductosXMercadoResponse;
+import com.anys.lleve_casera_dv.model.ProductosXMercado;
+
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ElementosMercadoFragment extends Fragment{
     AdaptadorElementosMercado adaptadorElementosMercado;
     RecyclerView recyclerViewElemMerc;
-    ArrayList<ElementosMercado> listElemMerc;
+    ArrayList<ProductosXMercado> listElemMerc;
     DialogFragment cantidadProducto = new CantProductoFragment2();
     String nomProduct="";
 
@@ -36,6 +42,9 @@ public class ElementosMercadoFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        String nombreMercado= getArguments().getString("nombreMercado");
+        TextView toolbar = getActivity().findViewById(R.id.toolbar_title);
+        toolbar.setText("Productos de "+nombreMercado);
     }
 
     @Override
@@ -43,37 +52,20 @@ public class ElementosMercadoFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_elementos_mercado, container, false);
-
         recyclerViewElemMerc = vista.findViewById(R.id.recyclerElementosMercado);
         listElemMerc = new ArrayList<>();
 
         //Cargamos los elementos
         cargarListaElementosMercado();
-        mostrarElemMercado();
-
         return vista;
-
     }
 
     private void cargarListaElementosMercado() {
-        /*private int id_elementoMercado, String nombreElem, double precioElem, int imagen_elem*/
-        listElemMerc.add(new ElementosMercado(1,"Arroz",2.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(2,"Aceite",1.80,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(3,"Avena",2.20,R.drawable.avena_ositos));
-        listElemMerc.add(new ElementosMercado(4,"Quacker",2.90,R.drawable.avena_quaker));
-        listElemMerc.add(new ElementosMercado(5,"Aceite",5.20,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(6,"Lentejas",1.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(7,"Arroz Hoja",1.30,R.drawable.arroz_hoja));
-        listElemMerc.add(new ElementosMercado(8,"Arroz",2.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(9,"Lentejas",1.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(10,"Arroz",2.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(11,"Avena",2.30,R.drawable.avena_ositos));
-        listElemMerc.add(new ElementosMercado(12,"Arroz",1.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(13,"Quacker",2.30,R.drawable.avena_ositos));
-        listElemMerc.add(new ElementosMercado(14,"Arroz",2.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(15,"Arroz",2.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(16,"Arroz",2.30,R.drawable.arroz_costeno));
-        listElemMerc.add(new ElementosMercado(17,"Arroz",2.30,R.drawable.arroz_costeno));
+
+        //llamamos a los argumentos guardados en el Bundle segun su key
+        int mercado = getArguments().getInt("codigoProductoM");
+        Call<ProductosXMercadoResponse> call = mercadoApiAdapter.getApiService().getProductosXMercado(mercado);
+        call.enqueue(new productosXMercadoCallback());
 
     }
 
@@ -88,7 +80,7 @@ public class ElementosMercadoFragment extends Fragment{
                 /*Aqui se coloca
                 * Navigation.findNavController(v).navigate(R.id.ID_DE_LA_VISTA_PARA_AÑADIR_PRODUCTOS_AL_CARRITO);
                 * */
-                nomProduct = listElemMerc.get(recyclerViewElemMerc.getChildAdapterPosition(v)).getNombreElem();
+                nomProduct = listElemMerc.get(recyclerViewElemMerc.getChildAdapterPosition(v)).getProducto();
 
                 cantidadProducto.show(getFragmentManager(), "cantidadProducto");
                 Bundle bundle = new Bundle();
@@ -120,6 +112,43 @@ public class ElementosMercadoFragment extends Fragment{
         });
         super.onCreateOptionsMenu(menu, inflater);
 
+    }
+
+    private class productosXMercadoCallback implements Callback<ProductosXMercadoResponse> {
+        @Override
+        public void onResponse(Call<ProductosXMercadoResponse> call, Response<ProductosXMercadoResponse> response) {
+            if(response.isSuccessful()){
+                ProductosXMercadoResponse productosXMercadoResponse= response.body();
+                if(productosXMercadoResponse.getEstado() == 1){
+                    listElemMerc = productosXMercadoResponse.getProductosXMercados();
+                    mostrarElemMercado();
+                }
+            }else{
+                Toast.makeText(getContext(), "Error en el formato de respuesta", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ProductosXMercadoResponse> call, Throwable t) {
+
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        TextView toolbar = getActivity().findViewById(R.id.toolbar_title);
+        toolbar.setText("Mercados");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorCarrito;
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorMercados;
@@ -29,7 +30,8 @@ public class CarritoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        TextView toolbar = getActivity().findViewById(R.id.toolbar_title);
+        toolbar.setText("Carrito de Compra");
 
     }
 

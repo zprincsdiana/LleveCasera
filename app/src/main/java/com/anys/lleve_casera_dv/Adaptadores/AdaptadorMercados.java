@@ -128,7 +128,7 @@ public class AdaptadorMercados extends RecyclerView.Adapter<AdaptadorMercados.Vi
     @Override
     public void onBindViewHolder(@NonNull AdaptadorMercados.ViewHolder holder, int position) {
         //Colocando valores de al cardw
-        String id = mercados.get(position).getCodigoMercado();
+        int id = mercados.get(position).getCodigoMercado();
         String url= "https://smipmec.000webhostapp.com/Proyecto/LleveCasera/recursos/img/mercado/"+id+".png";
         holder.nombremercado.setText(mercados.get(position).getNombreMercado());
         holder.distritomercado.setText(mercados.get(position).getDistritoMercado());

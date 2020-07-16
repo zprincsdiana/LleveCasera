@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anys.lleve_casera_dv.Bean.ElementosMercado;
 import com.anys.lleve_casera_dv.Bean.Productos;
 import com.anys.lleve_casera_dv.R;
+import com.anys.lleve_casera_dv.model.ProductosXMercado;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,11 +26,11 @@ public class AdaptadorElementosMercado extends RecyclerView.Adapter<AdaptadorEle
     implements View.OnClickListener, Filterable {
     Context context;
     LayoutInflater inflater;
-    ArrayList<ElementosMercado> elementosMercados,listaTotElemMerc;
+    ArrayList<ProductosXMercado> elementosMercados,listaTotElemMerc;
 
     private View.OnClickListener listener;
 
-    public AdaptadorElementosMercado(Context context, ArrayList<ElementosMercado> elementosMercados) {
+    public AdaptadorElementosMercado(Context context, ArrayList<ProductosXMercado> elementosMercados) {
         this.inflater = LayoutInflater.from(context);
         this.elementosMercados = elementosMercados;
         this.listaTotElemMerc = new ArrayList<>(elementosMercados);
@@ -73,13 +75,13 @@ public class AdaptadorElementosMercado extends RecyclerView.Adapter<AdaptadorEle
         //Ejecuta en el background
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<ElementosMercado> listaFiltrada = new ArrayList<>();
+            ArrayList<ProductosXMercado> listaFiltrada = new ArrayList<>();
 
             if (charSequence.toString().isEmpty()){
                 listaFiltrada.addAll(listaTotElemMerc);
             }else {
-                for (ElementosMercado todo_elem_mercado : listaTotElemMerc){
-                    String nombres_productos = todo_elem_mercado.getNombreElem().toLowerCase();
+                for (ProductosXMercado todo_elem_mercado : listaTotElemMerc){
+                    String nombres_productos = todo_elem_mercado.getProducto().toLowerCase();
 
                     if (nombres_productos.contains(charSequence.toString().toLowerCase())){
                         listaFiltrada.add(todo_elem_mercado);
@@ -96,7 +98,7 @@ public class AdaptadorElementosMercado extends RecyclerView.Adapter<AdaptadorEle
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             elementosMercados.clear();
-            elementosMercados.addAll((Collection<? extends ElementosMercado>) filterResults.values);
+            elementosMercados.addAll((Collection<? extends ProductosXMercado>) filterResults.values);
             notifyDataSetChanged();
         }
     };
@@ -107,7 +109,6 @@ public class AdaptadorElementosMercado extends RecyclerView.Adapter<AdaptadorEle
         TextView nombreElemMerc,precioElemMerc;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
 
             cardViewElemMercado = itemView.findViewById(R.id.cardview_elementos_mercado);
             imageViewElemMerc = itemView.findViewById(R.id.imagen_elemento_mercado);
@@ -120,9 +121,15 @@ public class AdaptadorElementosMercado extends RecyclerView.Adapter<AdaptadorEle
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorElementosMercado.ViewHolder holder, int position) {
-        holder.nombreElemMerc.setText(elementosMercados.get(position).getNombreElem());
-        holder.precioElemMerc.setText(elementosMercados.get(position).getPrecioElem()+"");
-        holder.imageViewElemMerc.setImageResource(elementosMercados.get(position).getImagen_elem());
+        String nomImg = elementosMercados.get(position).getProducto();
+        String url = "https://smipmec.000webhostapp.com/Proyecto/LleveCasera/recursos/img/producto/"+nomImg+".jpg";
+        holder.nombreElemMerc.setText(elementosMercados.get(position).getProducto());
+        holder.precioElemMerc.setText(elementosMercados.get(position).getPrecio()+"");
+        Picasso.get()
+                .load(url)
+                .placeholder(R.drawable.ic_producto)
+                .error(R.drawable.ic_producto)
+                .into(holder.imageViewElemMerc);
 
     }
 }

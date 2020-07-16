@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anys.lleve_casera_dv.Adaptadores.AdaptadorProductos;
@@ -38,6 +39,8 @@ public class ProductosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        TextView toolbar = getActivity().findViewById(R.id.toolbar_title);
+        toolbar.setText("Productos");
 
     }
 
@@ -47,10 +50,8 @@ public class ProductosFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_productos, container, false);
         recyclerViewProductos = view.findViewById(R.id.recyclerview_producto);
-        //listProductos = new ArrayList<>();
         //Cargar la List
         cargarListaProductos();
-       // mostrarElementos();
 
         return view;
     }
@@ -58,23 +59,6 @@ public class ProductosFragment extends Fragment {
     public void cargarListaProductos(){
         Call<ProductosResponse> call = productoApiAdapter.getApiService().getAllProducto();
         call.enqueue(new productosCallback());
-        /*listProductos.add(new Productos(1,"Quacker","Precio: S/1.50","Mercado Unicachi",
-                "Distrito: La Victoria",R.drawable.avena_quaker));
-        listProductos.add(new Productos(2,"Arroz","Precio: S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.arroz_costeno));
-        listProductos.add(new Productos(3,"Avena","Precio:S/1.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.avena_ositos));
-        listProductos.add(new Productos(4,"Ajinomen","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.ajinomen));
-        listProductos.add(new Productos(5,"Frejoles","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.frejol_costeno));
-        listProductos.add(new Productos(6,"Chorizo","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.chorizo_ottok));
-        listProductos.add(new Productos(7,"Azucar","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.azucar_rubia));
-        listProductos.add(new Productos(8,"Arroz Hoja","Precio:S/2.50","Mercado Caqueta",
-                "Distrito: San Martin de Porres",R.drawable.arroz_hoja));
-   */
 
     }
 

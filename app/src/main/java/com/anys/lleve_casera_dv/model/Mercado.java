@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Mercado {
     @SerializedName("codigoMercado")
-    private String codigoMercado;
+    private int codigoMercado;
     @SerializedName("nombreMercado")
     private String nombreMercado;
     @SerializedName("distritoMercado")
@@ -16,7 +16,10 @@ public class Mercado {
     @SerializedName("celularMercado")
     private String celularMercado;
 
-    public Mercado(String codigoMercado, String nombreMercado, String distritoMercado, String provinciaMercado, String regionMercado, String celularMercado) {
+    public Mercado() {
+    }
+
+    public Mercado(int codigoMercado, String nombreMercado, String distritoMercado, String provinciaMercado, String regionMercado, String celularMercado) {
         this.codigoMercado = codigoMercado;
         this.nombreMercado = nombreMercado;
         this.distritoMercado = distritoMercado;
@@ -25,11 +28,11 @@ public class Mercado {
         this.celularMercado = celularMercado;
     }
 
-    public String getCodigoMercado() {
+    public int getCodigoMercado() {
         return codigoMercado;
     }
 
-    public void setCodigoMercado(String codigoMercado) {
+    public void setCodigoMercado(int codigoMercado) {
         this.codigoMercado = codigoMercado;
     }
 

@@ -2,11 +2,12 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
     app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
+    app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
     android:id="@+id/cardview_elementos_mercado">
 
@@ -36,41 +37,72 @@
                 android:id="@+id/nombreElementoMercado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="Nombre de producto"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
-                >
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/monedaElementoMercado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neucha"
                     android:text="S/. "
-                    android:textSize="18sp"/>
+                    android:textAlignment="textEnd"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/precioElementoMercado"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neucha"
                     android:text="Precio del producto"
-                    android:textSize="18sp"/>
+                    android:textAlignment="textStart"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/comprarElementoMercado"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="5dp"
-                android:background="@drawable/regtangle_imge"
-                android:textSize="16sp"
-                android:textColor="@color/colorAccent"
-                android:text="Comprar"
-                 />
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:textSize="18sp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/carrito" />
+
+                <TextView
+                    android:id="@+id/comprarElementoMercado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/regtangle_imge"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Agregar al carrito"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
 
 
         </LinearLayout>

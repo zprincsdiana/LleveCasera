@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -38,6 +39,8 @@ public class MercadoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        TextView toolbar = getActivity().findViewById(R.id.toolbar_title);
+        toolbar.setText("Mercados");
     }
 
     @Override
@@ -92,7 +95,23 @@ public class MercadoFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Navigation.findNavController(v).navigate(R.id.elementos_mercadoFragment);
+                //Enviar 2 parametros: nombre del Mercado y el id del mercado
+                //El NOMBRE del MERCADO es para mostrarlo en la barra superior, x ejemplo: Productos del Mercado Unicachi
+                // el ID del MERCADO es un parametro necesario para el consumo del endpoint BuscarProductomercado
+
+                //Primero extraemos los datos del adapter
+                int codigoProductoM = listMercados.get(recyclerViewMercados.getChildAdapterPosition(v)).getCodigoMercado();
+                String nombreMercado = listMercados.get(recyclerViewMercados.getChildAdapterPosition(v)).getNombreMercado();
+
+                //Usamos Bundle para enviar los datos al ElementosMercadoFragment.java
+                Bundle mercadoId = new Bundle();
+                mercadoId.putInt("codigoProductoM", codigoProductoM);
+                mercadoId.putString("nombreMercado", nombreMercado);
+
+                //infamos la vista con el fragment de ElementosMercadoFragment.java
+
+
+                Navigation.findNavController(v).navigate(R.id.elementos_mercadoFragment, mercadoId );
             }
         });
 

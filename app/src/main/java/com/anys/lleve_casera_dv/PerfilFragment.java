@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anys.lleve_casera_dv.io.response.UsuarioResponse;
@@ -33,7 +34,8 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        TextView toolbar = getActivity().findViewById(R.id.toolbar_title);
+        toolbar.setText("Perfil");
 
     }
 
