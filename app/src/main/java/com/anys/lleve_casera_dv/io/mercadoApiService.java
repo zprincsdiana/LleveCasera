@@ -2,11 +2,8 @@ package com.anys.lleve_casera_dv.io;
 
 import com.anys.lleve_casera_dv.io.response.MercadosResponse;
 import com.anys.lleve_casera_dv.io.response.ProductosXMercadoResponse;
-import com.anys.lleve_casera_dv.model.Mercado;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

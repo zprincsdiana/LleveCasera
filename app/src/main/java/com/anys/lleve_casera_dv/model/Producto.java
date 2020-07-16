@@ -9,13 +9,13 @@ public class Producto {
     @SerializedName("precioProductoM")
     private String precioProductoM;
     @SerializedName("codigoMercado")
-    private String codigoMercado;
+    private int codigoMercado;
     @SerializedName("nombreMercado")
     private String nombreMercado;
     @SerializedName("distritoMercado")
     private String distritoMercado;
 
-    public Producto(String nombreProducto, String precioProductoM, String codigoMercado, String nombreMercado, String distritoMercado) {
+    public Producto(String nombreProducto, String precioProductoM, int codigoMercado, String nombreMercado, String distritoMercado) {
         this.nombreProducto = nombreProducto;
         this.precioProductoM = precioProductoM;
         this.codigoMercado = codigoMercado;
@@ -39,11 +39,11 @@ public class Producto {
         this.precioProductoM = precioProductoM;
     }
 
-    public String getCodigoMercado() {
+    public int getCodigoMercado() {
         return codigoMercado;
     }
 
-    public void setCodigoMercado(String codigoMercado) {
+    public void setCodigoMercado(int codigoMercado) {
         this.codigoMercado = codigoMercado;
     }
 

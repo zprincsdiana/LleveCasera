@@ -86,8 +86,6 @@ public class ProductosFragment extends Fragment {
         }
 
 
-
-
     public void mostrarElementos(){
         recyclerViewProductos.setLayoutManager(new LinearLayoutManager(getContext()));
         adaptadorProductos = new AdaptadorProductos(getContext(),listProductos);
@@ -96,10 +94,18 @@ public class ProductosFragment extends Fragment {
         adaptadorProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int codigoProductoM = listProductos.get(recyclerViewProductos.getChildAdapterPosition(v)).getCodigoMercado();
+                String nombreMercado = listProductos.get(recyclerViewProductos.getChildAdapterPosition(v)).getNombreMercado();
+
+                //Usamos Bundle para enviar los datos al ElementosMercadoFragment.java
+                Bundle mercadoId = new Bundle();
+                mercadoId.putInt("codigoProductoM", codigoProductoM);
+                mercadoId.putString("nombreMercado", nombreMercado);
                 /*Prueba
                 String mostrarNomProd = listProductos.get(recyclerViewProductos.getChildAdapterPosition(v)).getNombreProd();
                 Toast.makeText(getContext(),""+mostrarNomProd,Toast.LENGTH_SHORT).show();*/
-                Navigation.findNavController(v).navigate(R.id.productoMercadoFragment);
+                Navigation.findNavController(v).navigate(R.id.elementos_mercadoFragment,mercadoId);
             }
         });
 
